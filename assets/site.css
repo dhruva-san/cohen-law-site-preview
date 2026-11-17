@@ -61,10 +61,16 @@ p{max-width:64ch}
 /* ---------- header ---------- */
 .header{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
 .header.scrolled{background:rgba(0,0,0,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
-.header .wrap{display:flex;align-items:center;gap:32px;height:92px;transition:height .4s var(--ease)}
-.header.scrolled .wrap{height:68px}
-.logo img{height:58px;width:auto;transition:height .4s var(--ease)}
-.header.scrolled .logo img{height:44px}
+.header .wrap{display:flex;align-items:center;gap:32px;height:120px;transition:height .4s var(--ease)}
+.header.scrolled .wrap{height:84px}
+.logo img{height:84px;width:auto;transition:height .4s var(--ease)}   /* the logo file is 87px tall; larger would blur */
+.header.scrolled .logo img{height:58px}
+@media (max-width:560px){
+  .header .wrap{height:96px}
+  .header.scrolled .wrap{height:72px}
+  .logo img{height:66px}
+  .header.scrolled .logo img{height:50px}
+}
 .nav{display:flex;gap:clamp(18px,2.4vw,36px);margin-left:auto;font-size:.9rem;font-weight:500}
 .nav a{position:relative;padding:8px 0}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:var(--crimson);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
@@ -85,8 +91,10 @@ p{max-width:64ch}
 .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
 .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
-  linear-gradient(180deg,rgba(0,0,0,.72) 0,rgba(0,0,0,.1) 26%,rgba(0,0,0,.42) 58%,#000 100%),
-  linear-gradient(90deg,rgba(0,0,0,.5),rgba(0,0,0,0) 62%)}
+  linear-gradient(180deg,rgba(0,0,0,.5) 0,rgba(0,0,0,.04) 24%,rgba(0,0,0,.22) 56%,rgba(0,0,0,.8) 100%),
+  linear-gradient(90deg,rgba(0,0,0,.36),rgba(0,0,0,0) 66%)}
+/* the veil is light, so the text carries its own soft shadow; measured against the video, the headline keeps about 3:1 at its brightest spots */
+.hero h1,.hero-sub p,.facts{text-shadow:0 1px 2px rgba(0,0,0,.35),0 2px 28px rgba(0,0,0,.55)}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:#000;animation:curtain 2.2s ease-out forwards}
 @keyframes curtain{to{opacity:0;visibility:hidden}}
 .hero-body{width:100%;padding-top:140px}
@@ -97,7 +105,7 @@ p{max-width:64ch}
 .hero .rule{animation:draw 1.1s var(--ease) 1.15s both}
 @keyframes draw{from{transform:scaleX(0)}}
 .hero-sub{display:grid;grid-template-columns:minmax(0,34rem) auto;justify-content:space-between;align-items:end;gap:32px;margin-top:32px;opacity:0;animation:fade 1.2s ease 1.3s forwards}
-.hero-sub p{font-size:clamp(1rem,1.35vw,1.15rem);color:rgba(245,244,240,.86)}
+.hero-sub p{font-size:clamp(1rem,1.35vw,1.15rem);color:var(--paper)}
 .hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:22px}
 @keyframes fade{to{opacity:1}}
 .facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(40px,6vw,80px);border-top:1px solid var(--line);opacity:0;animation:fade 1.2s ease 1.6s forwards}
